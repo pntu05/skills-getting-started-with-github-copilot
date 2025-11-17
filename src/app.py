@@ -65,3 +65,36 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+@app.put("/activities/{activity_name}")
+def update_activity(activity_name: str, description: str = None, schedule: str = None, max_participants: int = None):
+    """Update an existing activity"""
+    # Validate activity exists
+    if activity_name not in activities:
+        raise HTTPException(status_code=404, detail="Activity not found")
+
+    # Get the specific activity
+    activity = activities[activity_name]
+
+    # Update fields if provided
+    if description is not None:
+        activity["description"] = description
+    if schedule is not None:
+        activity["schedule"] = schedule
+    if max_participants is not None:
+        activity["max_participants"] = max_participants
+
+    return {"message": f"Updated {activity_name}", "activity": activity}
+
+
+@app.delete("/activities/{activity_name}")
+def delete_activity(activity_name: str):
+    """Delete an activity"""
+    # Validate activity exists
+    if activity_name not in activities:
+        raise HTTPException(status_code=404, detail="Activity not found")
+
+    # Delete the activity
+    del activities[activity_name]
+    return {"message": f"Deleted {activity_name}"}
