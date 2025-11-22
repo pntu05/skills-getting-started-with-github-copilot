@@ -142,3 +142,27 @@ footer {
   padding: 20px;
   color: #666;
 }
+
+.participants-section {
+  margin-top: 12px;
+}
+
+.participants-list {
+  list-style: disc;
+  margin: 8px 0 0 20px;
+  padding: 0;
+  max-height: 6rem; /* keep cards tidy */
+  overflow: auto;
+}
+
+.participants-list li {
+  padding: 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* subtle muted style for empty state */
+.muted {
+  color: #777;
+  font-style: italic;
+}
